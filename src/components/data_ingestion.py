@@ -1,17 +1,30 @@
 import os
 import sys
-from src.exception import CustomException
-#import exception
-from src.logger import logging
+print(os.system("pwd"))
+print("------------")
+sys.path.insert(1, 'src/')
+sys.path.insert(2, 'src/components/')
+from exception import CustomException
+#import logger
+from logger import logging
+
+# from src.exception import CustomException
+# from src.logger import logging
+
 #import logger
 import pandas as pd
 
 
 print(os.system("pwd"))
 
+
+
 #import data_transformation
-from src.components.data_transformation import DataTransformationConfig
-from src.components.data_transformation import DataTransformation
+from data_transformation import DataTransformationConfig
+from data_transformation import DataTransformation
+
+from model_trainer import ModelTrainerConfig
+from model_trainer import ModelTrainer
 
 
 from sklearn.model_selection import train_test_split
@@ -60,4 +73,8 @@ if __name__=="__main__":
 
     data_transformation = DataTransformation()
     train_arr,test_arr,_= data_transformation.initiate_data_transformation(train_data,test_data)
+
+    modeltrainer = ModelTrainer()
+    bm,r2 =  modeltrainer.initiate_model_trainer(train_arr,test_arr)
+    print(f"Best model among others : {bm} \n Performance : {r2}")
 
